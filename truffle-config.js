@@ -18,6 +18,7 @@ const web3 = new Web3();
 module.exports = {
     plugins: [
         'truffle-plugin-verify'
+        'truffle-contract-size'
     ],
 
     api_keys: {
@@ -82,7 +83,7 @@ module.exports = {
             version: "0.5.17",
             settings: {
                 optimizer: {
-                    enabled: true,
+                    version: "0.8.3",
                     runs: 999999
                 },
             }

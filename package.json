@@ -1,13 +1,22 @@
 {
   "name": "rubic-nft",
   "version": "1.0.0",
+  "scripts": {
+    "verify": "truffle run verify Migrations --network kovan",
+    "lint": "solhint 'contracts/**/*.sol'",
+    "prettier": "prettier --write 'contracts/**/*.sol'"
+  },
   "dependencies": {},
   "devDependencies": {
+    "@openzeppelin/contracts": "^4.3.2",
     "@truffle/hdwallet-provider": "^1.5.0",
     "dotenv": "^10.0.0",
     "openzeppelin-contracts": "^4.0.0",
     "openzeppelin-solidity": "^4.3.2",
     "openzeppelin-test-helpers": "^0.5.1",
+    "prettier": "^2.4.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.18",
+    "solhint-plugin-prettier": "^0.0.5",
     "truffle": "^5.4.13",
     "truffle-contract-size": "^2.0.1",
     "truffle-hdwallet-provider": "^1.0.17",
