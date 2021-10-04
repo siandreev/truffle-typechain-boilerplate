@@ -1,0 +1,17 @@
+{
+  "name": "rubic-nft",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "@truffle/hdwallet-provider": "^1.5.0",
+    "dotenv": "^10.0.0",
+    "openzeppelin-contracts": "^4.0.0",
+    "openzeppelin-solidity": "^4.3.2",
+    "openzeppelin-test-helpers": "^0.5.1",
+    "truffle": "^5.4.13",
+    "truffle-contract-size": "^2.0.1",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "truffle-plugin-verify": "^0.5.15",
+    "web3": "^1.6.0"
+  }
+}
