@@ -17,7 +17,7 @@ const web3 = new Web3();
 
 module.exports = {
     plugins: [
-        'truffle-plugin-verify'
+        'truffle-plugin-verify',
         'truffle-contract-size'
     ],
 
@@ -80,10 +80,10 @@ module.exports = {
 
     compilers: {
         solc: {
-            version: "0.5.17",
+            version: "0.8.3",
             settings: {
                 optimizer: {
-                    version: "0.8.3",
+                    enabled: true,
                     runs: 999999
                 },
             }

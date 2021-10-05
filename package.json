@@ -2,7 +2,8 @@
   "name": "rubic-nft",
   "version": "1.0.0",
   "scripts": {
-    "verify": "truffle run verify Migrations --network kovan",
+    "migrate": "truffle migrate --reset --network kovan && sleep 5 && yarn verify",
+    "verify": "truffle run verify ERC1155Rubic --network kovan",
     "lint": "solhint 'contracts/**/*.sol'",
     "prettier": "prettier --write 'contracts/**/*.sol'"
   },
