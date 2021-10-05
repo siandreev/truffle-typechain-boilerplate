@@ -1,18 +1,22 @@
-const HDWalletProvider = require("@truffle/hdwallet-provider");
-
-const BN = require("bn.js");
-
 require('dotenv').config();
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+const BN = require("bn.js");
+const Web3 = require("web3");
+
 const {
     ETHERSCAN_API_KEY,
     PRIVATE_KEY,
+    ALICE_PRIVATE_KEY,
+    BOB_PRIVATE_KEY,
     DEPLOY_GAS_LIMIT,
     DEPLOY_GAS_PRICE,
     INFURA_ID_PROJECT,
+    QUICKNODE_RPC,
     MNEMONIC
 } = process.env;
 
-const Web3 = require("web3");
+const privateKeys = [PRIVATE_KEY, ALICE_PRIVATE_KEY, BOB_PRIVATE_KEY];
+
 const web3 = new Web3();
 
 module.exports = {
@@ -36,7 +40,7 @@ module.exports = {
         },
         eth_mainnet: {
             provider: () => new HDWalletProvider({
-                privateKeys :[PRIVATE_KEY],
+                privateKeys: [PRIVATE_KEY],
                 providerOrUrl: 'https://mainnet.infura.io/v3/' + INFURA_ID_PROJECT
             }),
             network_id: 1,
@@ -46,8 +50,8 @@ module.exports = {
         },
         kovan: {
             provider: () => new HDWalletProvider({
-                privateKeys :[PRIVATE_KEY],
-                providerOrUrl: 'wss://kovan.infura.io/ws/v3/' + INFURA_ID_PROJECT
+                privateKeys: privateKeys,
+                providerOrUrl: QUICKNODE_RPC
             }),
             network_id: 42,
             confirmations: 0,
@@ -56,7 +60,7 @@ module.exports = {
         },
         matic_testnet: {
             provider: () => new HDWalletProvider({
-                privateKeys :[PRIVATE_KEY],
+                privateKeys: privateKeys,
                 providerOrUrl: 'https://polygon-mumbai.infura.io/v3/' + INFURA_ID_PROJECT
             }),
             network_id: 80001,
@@ -67,7 +71,7 @@ module.exports = {
         },
         matic_mainnet: {
             provider: () => new HDWalletProvider({
-                privateKeys :[PRIVATE_KEY],
+                privateKeys: privateKeys,
                 providerOrUrl: 'https://rpc-mainnet.matic.network'
             }),
             network_id: 137,
