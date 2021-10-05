@@ -2,7 +2,11 @@
   "name": "rubic-nft",
   "version": "1.0.0",
   "scripts": {
-    "migrate": "truffle migrate --reset --network kovan && sleep 5 && yarn verify",
+    "generate-types": "typechain --target=truffle-v5 'build/contracts/*.json'",
+    "postinstall": "truffle compile && yarn generate-types",
+    "build": "tsc -p ./tsconfig.migrate.json --outDir migrations",
+    "migrate": "truffle migrate --reset --network kovan && sleep 10 && yarn verify",
+    "bm": "yarn build && yarn migrate",
     "verify": "truffle run verify ERC1155Rubic --network kovan",
     "lint": "solhint 'contracts/**/*.sol'",
     "prettier": "prettier --write 'contracts/**/*.sol'"
@@ -11,6 +15,11 @@
   "devDependencies": {
     "@openzeppelin/contracts": "^4.3.2",
     "@truffle/hdwallet-provider": "^1.5.0",
+    "@typechain/truffle-v5": "^5.1.0",
+    "@types/bn.js": "^5.1.0",
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^9.0.0",
+    "@types/web3": "^1.2.2",
     "dotenv": "^10.0.0",
     "openzeppelin-contracts": "^4.0.0",
     "openzeppelin-solidity": "^4.3.2",
@@ -22,6 +31,10 @@
     "truffle-contract-size": "^2.0.1",
     "truffle-hdwallet-provider": "^1.0.17",
     "truffle-plugin-verify": "^0.5.15",
-    "web3": "^1.6.0"
+    "typechain": "^5.1.2",
+    "typescript": "^4.4.3",
+    "web3": "^1.6.0",
+    "web3-core": "^1.6.0",
+    "web3-eth-contract": "^1.6.0"
   }
 }
