@@ -8,18 +8,20 @@ on:
 
 jobs:
   test:
-    strategy:
-      matrix:
-        node: ['12.x']
-        os: [ubuntu-latest]
-
-    runs-on: ${{ matrix.os }}
+    name: Check code base
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
       - run: npm install -g yarn
 
@@ -28,9 +30,24 @@ jobs:
       - uses: actions/cache@v1
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ matrix.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ubuntu-latest-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ matrix.os }}-yarn-
+            ubuntu-latest-yarn-
+
+      - name: create env file
+        run: |
+          touch .env
+          echo ETHERSCAN_API_KEY=${{ secrets.ETHERSCAN_API_KEY }} >> .env
+          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
+          echo MNEMONIC=${{ secrets.MNEMONIC }} >> .env
+          echo INFURA_ID_PROJECT=${{ secrets.INFURA_ID_PROJECT }} >> .env
+          echo QUICKNODE_RPC=${{ secrets.QUICKNODE_RPC }} >> .env
+          echo DEPLOY_GAS_LIMIT=${{ secrets.DEPLOY_GAS_LIMIT }} >> .env
+          echo DEPLOY_GAS_PRICE=${{ secrets.DEPLOY_GAS_PRICE }} >> .env
+          echo TOKEN_NAME=${{ secrets.TOKEN_NAME }} >> .env
+          echo TOKEN_SYMBOL=${{ secrets.TOKEN_SYMBOL }} >> .env
+          echo TEST_PRIVATE_KEY=${{ secrets.TEST_PRIVATE_KEY }} >> .env
+
       - run: yarn
-      - run: yarn test
       - run: yarn lint
+      - run: yarn test
