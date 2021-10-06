@@ -4,6 +4,11 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "quotes": ["error", "single"],
+    "compiler-version": ["error", "^0.8.3"],
+    "func-visibility": ["warn", { "ignoreConstructors": true }],
+    "no-empty-blocks": "off",
+    "reason-string": ["warn", { "maxLength": 64 }]
   }
 }

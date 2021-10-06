@@ -6,8 +6,7 @@ const Web3 = require("web3");
 const {
     ETHERSCAN_API_KEY,
     PRIVATE_KEY,
-    ALICE_PRIVATE_KEY,
-    BOB_PRIVATE_KEY,
+    TEST_PRIVATE_KEY,
     DEPLOY_GAS_LIMIT,
     DEPLOY_GAS_PRICE,
     INFURA_ID_PROJECT,
@@ -15,14 +14,13 @@ const {
     MNEMONIC
 } = process.env;
 
-const privateKeys = [PRIVATE_KEY, ALICE_PRIVATE_KEY, BOB_PRIVATE_KEY];
+const privateKeys = [PRIVATE_KEY, TEST_PRIVATE_KEY];
 
 const web3 = new Web3();
 
 module.exports = {
     plugins: [
-        'truffle-plugin-verify',
-        'truffle-contract-size'
+        'truffle-plugin-verify'
     ],
 
     api_keys: {
